@@ -311,7 +311,7 @@ const SelectInput = React.forwardRef(function SelectInput(props, ref) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     React.useEffect(() => {
       if (!foundMatch && !multiple && value !== '') {
-        const values = childrenArray.map((child) => child.props.value);
+        const values = childrenArray.map((child) => (child && child.props) ? child.props.value : 'undefined');
         console.warn(
           [
             `Material-UI: You have provided an out-of-range value \`${value}\` for the select ${

@@ -376,6 +376,18 @@ describe('<Select />', () => {
           'Material-UI: You have provided an out-of-range value `20` for the select component.',
         );
       });
+      it('warns missing MenuItem but handles non-menu items gracefully', () => {
+        render(
+          <Select value={20}>
+            <MenuItem value={10}>Ten</MenuItem>)
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>,
+        );
+        expect(console.warn.callCount).to.equal(2); // strict mode renders twice
+        expect(console.warn.args[0][0]).to.include(
+          'The available values are `10`, `undefined`, `30`',
+        );
+      });
     });
   });
 
